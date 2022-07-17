@@ -28,4 +28,4 @@ jobs:
       - name: Build
         run: yarn run build
       - name: deploy to Linode
-        run: rsync -avP build/ ${{ secrets.LINODE_USERNAME }}@${{ secrets.LINODE_HOST }}:/var/www/testnode.com/web
+        run: rsync -avP build/ root@172.104.165.41:/var/www/testnode.com/web
