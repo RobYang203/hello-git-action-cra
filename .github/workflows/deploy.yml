@@ -32,5 +32,5 @@ jobs:
           host: ${{ secrets.LINODE_HOST }}
           username: ${{ secrets.LINODE_USERNAME }}
           key: ${{ secrets.LINODE_SSHKEY }}
-          source: "build/"
+          source: "build/*"
           target: "/var/www/testnode/web"
