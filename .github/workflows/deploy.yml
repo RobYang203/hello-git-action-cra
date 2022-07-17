@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: install dependencies
+        run: yarn install --frozen-lockfile
       - name: Build
         run: yarn run build
       - name: deploy to Linode
