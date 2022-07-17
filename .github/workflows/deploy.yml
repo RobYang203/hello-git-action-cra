@@ -1,0 +1,29 @@
+name: project deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+      - name: install dependencies
+        run: npm ci
+      - name: run test
+        id: checkTest
+        run: npm test
+  cd:
+    needs: [ci]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: npm run build
+      - name: deploy to Linode
+        run: rsync -avP build/ ${{ secrets.LINODE_USERNAME }}@${{ secrets.LINODE_HOST }}:/var/www/testnode.com/web
